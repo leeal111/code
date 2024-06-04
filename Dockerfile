@@ -6,12 +6,13 @@ ENV HTTP_PROXY "http://127.0.0.1:7890"
 ENV https_proxy "http://127.0.0.1:7890"
 ENV HTTPS_PROXY "http://127.0.0.1:7890"
 
-COPY build.sh /root/.config/
-COPY init.bashrc /root/.config/bash/
+COPY script/build.sh /root/.config/
+
+COPY config/init.bashrc /root/.config/bash/
 
 RUN bash /root/.config/build.sh
 
-COPY nvim /root/.config/nvim/
+COPY config/nvim /root/.config/nvim/
 
 WORKDIR /root/.config
 # WORKDIR /root/workspace

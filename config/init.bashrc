@@ -1,4 +1,4 @@
-# add proxy
+# proxy
 export hostip="127.0.0.1"
 export socks_hostport=7890
 export http_hostport=7890
@@ -20,7 +20,14 @@ alias echoproxy='
     echo $https_proxy
     echo $http_proxy
 '
-#end proxy
 
+# nvim
 export PATH="$PATH:/opt/nvim-linux64/bin"
 alias v="nvim"
+
+# docker
+alias dp="docker ps -a"
+alias dil="docker image list"
+deb() {
+    docker exec -it "$1" bash
+}

@@ -9,6 +9,7 @@
 测试：
 ```bash
 docker build --network host -t test . && docker run -it --rm test
+docker rmi $(docker images -f "dangling=true" -q)
 ```
 
 ## 阶段性目标

@@ -8,7 +8,7 @@
 
 测试：
 ```bash
-docker build --network host -t test . && docker run -it --rm test
+docker build --network host -t leeal111/code:latest . && docker run -it --rm leeal111/code:latest
 docker rmi $(docker images -f "dangling=true" -q)
 ```
 

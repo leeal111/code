@@ -9,8 +9,10 @@ apt install -y curl git
 apt clean
 rm -rf /var/lib/apt/lists/*
 
-# nvim install
+# other install
 mkdir -p /root/tmp && cd /root/tmp
+
+# nvim install
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 rm -rf /opt/nvim
 tar -C /opt -xzf nvim-linux64.tar.gz

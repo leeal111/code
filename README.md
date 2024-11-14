@@ -1,17 +1,11 @@
 # code
 
-## 目的
-
-从任意基础镜像，构建个人的编程环境（bash、tmux、nvim）
-
-## Usage
-
-测试：
+## 构建镜像
 ```bash
-docker build --network host -t leeal111/code:latest . && docker run -it --rm leeal111/code:latest
-docker rmi $(docker images -f "dangling=true" -q)
+docker build -t leeal111/code:latest .
 ```
 
-## 阶段性目标
-
-- 在ubuntu:latest基础上构建基于nvim编辑器的python编程环境
+## 创建容器
+```bash
+docker run -it --name code --net host -v ~/ws/:/root/ws/ leeal111/code:latest
+```

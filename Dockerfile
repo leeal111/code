@@ -1,11 +1,31 @@
 FROM ubuntu:latest
 
-COPY script/build.sh /root/.config/
+# basic
+RUN apt update -y && apt upgrade -y
+RUN echo -e "Asia\nShanghai\n" | apt install -y tzdata
+RUN apt install -y git curl unzip
 
-COPY config/init.bashrc /root/.config/bash/
+# cpp
+RUN apt install -y build-essential gdb cmake
+RUN tag_name=$(curl -s https://api.github.com/repos/clangd/clangd/releases/latest | \
+    sed -En '/tag_name/{s/^.*"tag_name".*"(.*)".*$/\1/;p}') &&\
+    curl -LO https://github.com/clangd/clangd/releases/download/${tag_name}/clangd-linux-${tag_name}.zip &&\
+    unzip -d /opt/ clangd-linux-${tag_name}.zip && rm clangd-linux-${tag_name}.zip &&\
+    echo '\nexport PATH=/opt/clangd_'${tag_name}'/bin:$PATH' >> ~/.bashrc
 
-RUN bash /root/.config/build.sh
+# python
+RUN curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &&\
+    bash Miniconda3-latest-Linux-x86_64.sh -b && rm Miniconda3-latest-Linux-x86_64.sh &&\
+    echo '\nexport PATH=~/miniconda3/bin:$PATH' >> ~/.bashrc && . ~/.bashrc && conda init
 
-COPY config/nvim /root/.config/nvim/
+# go
+RUN tag_name=$(curl -s https://golang.google.cn/dl/ | \
+    sed -En "/<span>go.*\.linux-amd64.tar.gz<\/span>/{s/.*<span>go(.*)\.linux-amd64.tar.gz<\/span>.*/\1/;p}") &&\
+    curl -LO https://golang.google.cn/dl/go${tag_name}.linux-amd64.tar.gz &&\
+    tar -C /opt -xzf go${tag_name}.linux-amd64.tar.gz && rm go${tag_name}.linux-amd64.tar.gz &&\
+    echo '\nexport PATH=/opt/go/bin:$PATH' >> ~/.bashrc &&\
+    echo '\nexport GOPATH=~/ws/go' >> ~/.bashrc
 
-WORKDIR /root/workspace
+RUN mkdir /root/ws
+
+WORKDIR /root/ws

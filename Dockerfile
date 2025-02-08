@@ -10,6 +10,7 @@ RUN apt install -y git curl unzip
 
 # 用户基本配置
 RUN echo '\nexport LANG=C.UTF-8' >> ~/.bashrc
+RUN echo '\nalias sudo=' >> ~/.bashrc
 
 # cpp
 RUN apt install -y build-essential gdb cmake 

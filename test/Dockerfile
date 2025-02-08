@@ -1,5 +1,7 @@
-FROM ubuntu:latest
+# 构建和启动命令：
+# docker rmi code_test:latest && docker build --progress=plain -t code_test:latest ./test && docker run -it --rm --net host code_test:latest
 
+FROM ubuntu:latest
 # 系统基本配置
 RUN apt update -y && apt upgrade -y
 RUN echo -e "Asia\nShanghai\n" | apt install -y tzdata

@@ -22,7 +22,7 @@ RUN echo '\nexport LANG=C.UTF-8' >> ~/.bashrc
 RUN echo '\nalias sudo=' >> ~/.bashrc
 
 # cpp
-RUN apt install -y build-essential gdb cmake 
+RUN apt install -y build-essential gdb cmake gcc-13 g++-13
 RUN export tag_name=$(curl -s https://api.github.com/repos/clangd/clangd/releases/latest | \
     sed -En '/tag_name/{s/^.*"tag_name".*"(.*)".*$/\1/;p}') &&\
     curl -LO https://github.com/clangd/clangd/releases/download/${tag_name}/clangd-linux-${tag_name}.zip &&\

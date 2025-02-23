@@ -1,6 +1,9 @@
 # 构建命令：
 # docker rmi leeal111/code:latest && docker build -t leeal111/code:latest .
 
+# 启动命令：
+# docker run -it --name code --net host --mount type=volume,source=code,destination=/root/ws leeal111/code:latest
+
 FROM ubuntu:latest
 
 # 系统基本配置

@@ -46,5 +46,19 @@ RUN export tag_name=$(curl -s https://golang.google.cn/dl/ | \
     echo '\nexport GOPATH=~/ws/go' >> ~/.bashrc &&\
     echo '\nexport PATH="$GOPATH/bin":$PATH' >> ~/.bashrc
 
+# latex
+# it takes long time.
+RUN curl -LO https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz &&\
+    zcat < install-tl-unx.tar.gz | tar xf - &&\
+    rm install-tl-unx.tar.gz &&\
+    export year=$(echo install-tl-* | sed -En '{s/install-tl-([0-9]{4})[0-9]{4}/\1/;p}') &&\
+    echo '\nexport PATH=/usr/local/texlive/'${year}'/bin/x86_64-linux:$PATH' >> ~/.bashrc &&\
+    . ~/.bashrc &&\
+    cd install-tl-* &&\
+    perl ./install-tl --no-interaction &&\
+    cd .. &&\
+    rm -r install-tl-*
+RUN yes | apt install -y libfontconfig1 ttf-mscorefonts-installer 
+
 RUN mkdir /root/ws
 WORKDIR /root/ws

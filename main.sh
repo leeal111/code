@@ -15,4 +15,6 @@ bash ./go.sh
 
 bash ./latex.sh
 
+bash ./java.sh
+
 log "main.sh 执行完成。"

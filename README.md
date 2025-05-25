@@ -21,4 +21,12 @@
 
 注意，由于存在一些命令需要root权限，所以可能需要手动输入sudo密码。
 
-注意，你可能需要手动为Latex安装一些非开源字体，即执行 ` sudo apt install -y ttf-mscorefonts-installer `。
+注意，如果是WSL系统，你可以通过下面的方式快速为Latex安装一些非开源字体：
+
+```bash
+# 将 Windows 的字体目录软链接到 WSL 的字体目录，
+sudo ln -s /mnt/c/Windows/Fonts /usr/share/fonts/win-fonts
+
+# 刷新字体缓存
+fc-cache -fv
+```

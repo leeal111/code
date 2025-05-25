@@ -20,3 +20,5 @@
 ```
 
 注意，由于存在一些命令需要root权限，所以可能需要手动输入sudo密码。
+
+注意，你可能需要手动为Latex安装一些非开源字体，即执行 ` sudo apt install -y ttf-mscorefonts-installer `。
